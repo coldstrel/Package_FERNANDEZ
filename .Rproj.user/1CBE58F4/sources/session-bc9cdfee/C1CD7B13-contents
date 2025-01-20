@@ -1,0 +1,5 @@
+library(dplyr)
+data <- read.csv("data/US_honey_dataset_updated.csv")
+
+data |>
+  filter(year == 1995)
