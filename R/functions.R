@@ -20,7 +20,11 @@
 #' value_by_year(honey_data, "Alabama", c(1995, 1996))
 
 value_by_year <- function(dataset, state, year) {
-  result <- dataset |>
+  if (length(state) > 1) {
+    stop("Only 1 state is allowed")
+  }
+
+  result <- dataset %>%
     dplyr::filter(state == !!state, year %in% !!year) |>
     dplyr::group_by(year, state) |>
     dplyr::summarise(total = sum(production, na.rm = TRUE), .groups = "drop")
